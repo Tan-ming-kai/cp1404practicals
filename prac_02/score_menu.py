@@ -48,3 +48,4 @@ def grade_calculator(score):
 
 
 main()
+print("farewell")
