@@ -15,6 +15,7 @@ Any free time I have usually on weekends or days I do not have school
 
 Finishing the practicals on time
 
+
 ## What do you need to stop or change in your work for this subject overall so far?
 
 Remembering to commit my files to github after tasks 
