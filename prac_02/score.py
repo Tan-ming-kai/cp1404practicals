@@ -2,11 +2,11 @@ from random import *
 
 def main():
     score = float(input("Enter score: "))
-    result_comment = get_user_score(score)
+    result_comment = grade_calculator(score)
     print(result_comment)
 
 
-def get_user_score(score):
+def grade_calculator(score):
     if score < 0 or score >100:
         grade = "Enter a valid score"
         return grade
