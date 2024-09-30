@@ -39,7 +39,7 @@ print(f"{year} {name} for about ${cost}!")
 power_of = 0
 for exponent in range(0,11):
     calculation_of_value = 2**int(power_of)
-    print(f"2 ^ {exponent} is {calculation_of_value:>10}")
+    print(f"2 ^ {exponent:>2} is {calculation_of_value:>9}")
     power_of = power_of + 1
 
 # produce the following right-aligned output (DO NOT use a list):
