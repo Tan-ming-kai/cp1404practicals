@@ -9,3 +9,4 @@ print(random.uniform(2.5, 5.5))  # line 3
 #Max:5.5 Min:2.5
 
 print(random.randint(1,100))
+
