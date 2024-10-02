@@ -1,9 +1,12 @@
+
 name = input("Enter your name: ")
 
 
 def main():
     name_writer()
     file_reader()
+    numbers_txt_file_reader()
+
 
 
 
@@ -20,6 +23,11 @@ def file_reader():
 
 
 
+def numbers_txt_file_reader():
+    with open("numbers.txt", "r") as read_file:
+        first_two_lines = read_file.readlines()
+        first_two_numbers = int(first_two_lines[0]) + int(first_two_lines[1])
+        print(first_two_numbers)
 
 
 
