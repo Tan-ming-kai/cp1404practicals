@@ -1,4 +1,3 @@
-
 menu = """G - Get a valid score
 P - Print Result
 S - Show stars
