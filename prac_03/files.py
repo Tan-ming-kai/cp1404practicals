@@ -15,7 +15,14 @@ def name_writer():
 
 def file_reader():
     in_file = open("name.txt", "r")
-    print(f"Hi {in_file.read()}")
+    print(f"Hi {in_file.read()}!")
     in_file.close()
+
+
+
+
+
+
 main()
+
 
