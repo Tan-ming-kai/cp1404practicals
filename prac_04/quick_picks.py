@@ -3,7 +3,7 @@ def main():
     quick_pick_output = []
     number_of_quick_picks = input("How many quick picks? ")
     generate_quick_picks(number_of_quick_picks,quick_pick_output)
-    for quickpick in quick_pick_output:
+    for quickpick in quick_pick_output: # please ignore the spell check
         quickpick.sort()
         print(f"{quickpick[0]:>2} {quickpick[1]:>2} {quickpick[2]:>2} {quickpick[3]:>2} {quickpick[4]:>2} {quickpick[5]:>2}")
 
