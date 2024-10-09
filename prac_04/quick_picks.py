@@ -1,9 +1,11 @@
 from random import *
 def main():
     quick_pick_output = []
-    number_of_quick_picks = input("How many quick picks ")
+    number_of_quick_picks = input("How many quick picks? ")
     generate_quick_picks(number_of_quick_picks,quick_pick_output)
-    print(quick_pick_output)
+    for quickpick in quick_pick_output:
+        quickpick.sort()
+        print(f"{quickpick[0]:>2} {quickpick[1]:>2} {quickpick[2]:>2} {quickpick[3]:>2} {quickpick[4]:>2} {quickpick[5]:>2}")
 
 
 def generate_quick_picks(number_of_quick_picks,quick_pick_output):
