@@ -1,7 +1,7 @@
 """
 Word occurrences
 Estimate: 15 mins
-Actual:
+Actual: 20 mins
 """
 from operator import *
 word_to_count = {}
