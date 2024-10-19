@@ -9,8 +9,6 @@ email_to_name = {"bob@gmail.com":"Bob The Builder","manny@gmail.com":"Manny ","h
 output_email_to_name = {}
 user_email = input("Enter your email: ")
 
-def main():
-    print()
 
 for email in email_to_name:
     if email == user_email:
@@ -26,8 +24,6 @@ for email in email_to_name:
 for email,name in output_email_to_name.items():
     print(f"{name} ({email})")
 
-
-main()
 
 
 
