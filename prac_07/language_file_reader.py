@@ -54,7 +54,7 @@ def using_csv():
     in_file.close()
 
 
-# using_csv()
+using_csv()
 
 
 def using_namedtuple():
