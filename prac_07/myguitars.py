@@ -10,6 +10,12 @@ def main():
     for guitar in guitars:
         print(guitar)
 
+    # adding a new guitar
+    user_guitar_name = input("Name of your guitar: ")
+    user_guitar_year = input("Year of your guitar: ")
+    user_guitar_cost = input("Cost of your guitar: ")
+    user_guitar = Guitar(user_guitar_name, user_guitar_year,user_guitar_cost)
+
 
 def reads_guitar_csv_file():
     """reads guitar.csv file and returns it into a list"""
