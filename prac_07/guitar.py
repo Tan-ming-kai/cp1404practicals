@@ -11,6 +11,9 @@ class Guitar:
     def __repr__(self):
         return self.__str__()
 
+    def __lt__(self, other):
+        return self.year < other.year
+
     def get_age(self):
         guitar_age = 2024 - self.year
         return guitar_age
