@@ -19,8 +19,8 @@ class Project:
         print()
 
     def project_is_completed(self):
-        completed_projects = []
-        incomplete_projects = []
         if self.percentage == 100:
             return True
+        else:
+            return False
 
