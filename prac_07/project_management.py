@@ -41,11 +41,11 @@ def main():
                 else:
                     incomplete_projects.append(project)
 
-            print("Incomplete Projects")
+            print("Incomplete Projects:")
             for project in incomplete_projects:
                 print(f"\t{project}")
 
-            print("Completed Projects")
+            print("Completed Projects:")
             for project in completed_projects:
                 print(f"\t{project}")
             # blank line after display function
@@ -66,10 +66,18 @@ def main():
             projects.append(new_project)
 
         elif user_choice == 'U':
+
             i = 1
             for project in projects:
                 print(f"{i}. {project}")
                 i += 1
+            project_choice = validates_project_choice(projects)
+            print(projects[project_choice-1])
+
+            new_percentage = validates_percentage()
+            projects[project_choice-1].updated_percentage(new_percentage)
+
+        # end of user menu
         else:
             print(f"{user_choice} is not a valid option")
         print(menu)
@@ -151,5 +159,18 @@ def validates_percentage():
         print("Invalid input, please enter a real number")
         return validates_percentage()
 
+
+def validates_project_choice(projects):
+    """validates project choice input and only returns it when it is a number more than 0"""
+    try:
+        project_choice = int(input("Project choice: "))
+        if 0 < project_choice <= len(projects) :
+            return project_choice
+        else:
+            print(f"Project choice must be between 1 and {len(projects)}")
+            return validates_project_choice(projects)
+    except ValueError:
+        print("Invalid input, please enter a real number")
+        return validates_project_choice(projects)
 
 main()
