@@ -2,6 +2,7 @@ from prac_07.guitar import Guitar
 
 
 def main():
+    """contains the main function of the program"""
     guitars = reads_guitar_csv_file()
 
     # sorts the guitars list with the __lt__ method

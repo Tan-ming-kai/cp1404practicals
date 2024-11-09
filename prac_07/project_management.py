@@ -1,10 +1,13 @@
 """
 project management
 Estimate: 4 hours
-Actual:
+Actual: 3 hours
 """
+
 from prac_07.projects import Project
 from datetime import *
+
+FILENAME = "projects.txt"
 
 menu = """Menu:
 - (L)oad projects  
@@ -19,22 +22,35 @@ print("Welcome to Pythonic Project Management")
 
 
 def main():
-    projects = extract_file_information()
+    """contains the main functionality of the program"""
+    projects = extract_file_information(FILENAME)
+    projects.sort()
     print(f"Loaded {len(projects)} projects from projects.txt")
 
     print(menu)
     user_choice = input(">>> ").upper()
 
+    # start of menu inputs
     while user_choice != 'Q':
-
+        # loads file
         if user_choice == 'L':
-            print()
-        elif user_choice == 'S':
-            print()
-        elif user_choice == 'D':
+            try:
+                filename = input("Enter filename to load projects: ")
+                extract_file_information(filename)
+            except FileNotFoundError:
+                print(f"File not found, default file {FILENAME} used")
 
+        # saves file
+        elif user_choice == 'S':
+            saves_file(projects)
+            print("File saved successfully")
+
+        # display function
+        elif user_choice == 'D':
+            # stores completed and incomplete projects in a separate list
             completed_projects = []
             incomplete_projects = []
+
             for project in projects:
                 if project.project_is_completed():
                     completed_projects.append(project)
@@ -44,15 +60,24 @@ def main():
             print("Incomplete Projects:")
             for project in incomplete_projects:
                 print(f"\t{project}")
+            # blank line
+            print()
 
             print("Completed Projects:")
             for project in completed_projects:
                 print(f"\t{project}")
             # blank line after display function
             print()
-
+        # filter projects by start date
         elif user_choice == 'F':
-            print()
+
+            user_filter_date_str = validates_date()
+            user_filter_date = datetime.strptime(user_filter_date_str, "%d/%m/%Y").date()
+            filtered_projects = filter_project_by_date(projects, user_filter_date)
+            for project in filtered_projects:
+                print(f"{project}")
+
+        # adds project to projects
         elif user_choice == 'A':
 
             print("Let's add a new project")
@@ -64,18 +89,21 @@ def main():
             new_project = Project(name, new_date, priority, cost_estimate, completion_percentage)
             print(f"{new_project.name} added successfully")
             projects.append(new_project)
+            projects.sort()
 
+        # update the completion percentage of a project
         elif user_choice == 'U':
 
             i = 1
             for project in projects:
                 print(f"{i}. {project}")
                 i += 1
+
             project_choice = validates_project_choice(projects)
-            print(projects[project_choice-1])
+            print(projects[project_choice - 1])
 
             new_percentage = validates_percentage()
-            projects[project_choice-1].updated_percentage(new_percentage)
+            projects[project_choice - 1].updated_percentage(new_percentage)
 
         # end of user menu
         else:
@@ -83,13 +111,17 @@ def main():
         print(menu)
         user_choice = input(">>> ").upper()
 
+    # asks user is they would want to save the file before quitting
+    save_file_confirmation = input("Would you like to save the file (Y/N)? ").upper()
+    if save_file_confirmation == 'Y':
+        saves_file(projects)
     print("Thank you for using custom-built project management software.")
 
 
-def extract_file_information():
+def extract_file_information(filename):
     """ Reads file information and stores in project_list"""
     projects = []
-    with open("projects.txt", "r") as in_file:
+    with open(filename, "r") as in_file:
         in_file.readline()
         for line in in_file:
             parts = line.strip().split("\t")
@@ -105,17 +137,6 @@ def validates_name():
         return name
     print("project name cannot be blank.")
     return validates_name()
-
-
-def validates_date():
-    """validates project date input and only returns it when it is in the correct format of (dd/mm/yyyy)"""
-    new_date = input("start date (dd/mm/yyyy): ")
-    try:
-        datetime.strptime(new_date, "%d/%m/%Y")
-        return date
-    except ValueError:
-        print("Invalid date format do it in (dd/mm/yyyy)")
-        return validates_date()
 
 
 def validates_priority():
@@ -164,7 +185,7 @@ def validates_project_choice(projects):
     """validates project choice input and only returns it when it is a number more than 0"""
     try:
         project_choice = int(input("Project choice: "))
-        if 0 < project_choice <= len(projects) :
+        if 0 < project_choice <= len(projects):
             return project_choice
         else:
             print(f"Project choice must be between 1 and {len(projects)}")
@@ -172,5 +193,37 @@ def validates_project_choice(projects):
     except ValueError:
         print("Invalid input, please enter a real number")
         return validates_project_choice(projects)
+
+
+def validates_date():
+    """validates project date input and only returns it when it is in the correct format of (dd/mm/yyyy)"""
+    new_date = input("start date (dd/mm/yyyy): ")
+    try:
+        datetime.strptime(new_date, "%d/%m/%Y")
+        return new_date
+    except ValueError:
+        print("Invalid date format do it in (dd/mm/yyyy)")
+        return validates_date()
+
+
+def filter_project_by_date(projects, user_filter_date):
+    """compares the date of each project in the projects list with the user input for filter date and appends to a list """
+    filtered_projects = []
+
+    for project in projects:
+        if project.start_date >= user_filter_date:
+            filtered_projects.append(project)
+
+    return filtered_projects
+
+
+def saves_file(projects):
+    """opens and saves the projects list into the file of the users choice depending on the file they opened"""
+    with open(FILENAME, "w") as out_file:
+        out_file.write("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
+        for project in projects:
+            out_file.write(
+                f"{project.name}\t{project.start_date.strftime('%d/%m/%Y')}\t{project.priority}\t{project.cost_estimate}\t{project.percentage}\n")
+
 
 main()
