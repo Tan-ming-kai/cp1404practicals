@@ -4,6 +4,7 @@ Estimate: 4 hours
 Actual:
 """
 from prac_07.projects import Project
+from datetime import *
 
 menu = """Menu:
 - (L)oad projects  
@@ -53,9 +54,22 @@ def main():
         elif user_choice == 'F':
             print()
         elif user_choice == 'A':
-            print()
+
+            print("Let's add a new project")
+            name = validates_name()
+            new_date = validates_date()
+            priority = validates_priority()
+            cost_estimate = validates_cost_estimate()
+            completion_percentage = validates_percentage()
+            new_project = Project(name, new_date, priority, cost_estimate, completion_percentage)
+            print(f"{new_project.name} added successfully")
+            projects.append(new_project)
+
         elif user_choice == 'U':
-            print()
+            i = 1
+            for project in projects:
+                print(f"{i}. {project}")
+                i += 1
         else:
             print(f"{user_choice} is not a valid option")
         print(menu)
@@ -66,13 +80,76 @@ def main():
 
 def extract_file_information():
     """ Reads file information and stores in project_list"""
-    project_list = []
+    projects = []
     with open("projects.txt", "r") as in_file:
         in_file.readline()
         for line in in_file:
             parts = line.strip().split("\t")
             project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
-            project_list.append(project)
-        return project_list
+            projects.append(project)
+        return projects
+
+
+def validates_name():
+    """validates project name input and only returns a name if it is not blank"""
+    name = input("Name: ")
+    if name:
+        return name
+    print("project name cannot be blank.")
+    return validates_name()
+
+
+def validates_date():
+    """validates project date input and only returns it when it is in the correct format of (dd/mm/yyyy)"""
+    new_date = input("start date (dd/mm/yyyy): ")
+    try:
+        datetime.strptime(new_date, "%d/%m/%Y")
+        return date
+    except ValueError:
+        print("Invalid date format do it in (dd/mm/yyyy)")
+        return validates_date()
+
+
+def validates_priority():
+    """validates project priority input and only returns it when it is a number more than 0"""
+    try:
+        priority = int(input("Priority: "))
+        if priority > 0:
+            return priority
+        else:
+            print("Priority must be more than 0.")
+            return validates_priority()
+    except ValueError:
+        print("Invalid input, please enter a real number")
+        return validates_priority()
+
+
+def validates_cost_estimate():
+    """validates project cost input and only returns it when it is a number more than 0"""
+    try:
+        cost_estimate = float(input("Cost estimate: "))
+        if cost_estimate >= 0:
+            return cost_estimate
+        else:
+            print("Cost cannot be less than 0")
+            return validates_cost_estimate()
+    except ValueError:
+        print("Invalid input, please enter a real number")
+        return validates_cost_estimate()
+
+
+def validates_percentage():
+    """validates project completion percentage input and only returns it when it is a number more than 0"""
+    try:
+        percentage = int(input("Enter completion percentage (0-100): "))
+        if 0 <= percentage <= 100:
+            return percentage
+        else:
+            print("Completion percentage must be between 0 and 100.")
+            return validates_percentage()
+    except ValueError:
+        print("Invalid input, please enter a real number")
+        return validates_percentage()
+
 
 main()
