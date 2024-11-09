@@ -7,20 +7,18 @@ class Project:
         self.cost_estimate = cost_estimate
         self.percentage = percentage
 
-    def __str__(self):
-        return f"{self.name}, start: {self.date}, priority {self.priority}, estimate: ${self.cost_estimate}, completion: {self.percentage}%"
-
-    # Organise Pantry, start: 20/07/2022, priority 1, estimate: $25.00, completion: 55%
-
-    def __repr__(self):
-        return self.__str__()
-
-    def add_project(self):
-        print()
-
     def project_is_completed(self):
         if self.percentage == 100:
             return True
         else:
             return False
+
+    def updated_percentage(self, updated_percentage):
+        self.percentage = updated_percentage
+
+    def __str__(self):
+        return f"{self.name}, start: {self.date}, priority {self.priority}, estimate: ${self.cost_estimate}, completion: {self.percentage}%"
+
+    def __repr__(self):
+        return self.__str__()
 
