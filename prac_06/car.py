@@ -14,6 +14,7 @@ class Car:
         self.name = name
 
     def __str__(self):
+        """returns the main components of the class as a string"""
         return f"{self.name}, fuel={self.fuel}, odometer={self._odometer}"
 
     def __repr__(self):

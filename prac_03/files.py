@@ -1,4 +1,3 @@
-from time import process_time_ns
 
 name = input("Enter your name: ")
 

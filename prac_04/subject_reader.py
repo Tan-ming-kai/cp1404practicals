@@ -9,9 +9,9 @@ FILENAME = "subject_data.txt"
 
 def main():
     data = load_data()
-    print(data)
-    print()
-    display_details(data)
+    print(data) #part 2 of question
+    print() #empty line
+    display_details(data) #part 3
 
 
 def load_data():
