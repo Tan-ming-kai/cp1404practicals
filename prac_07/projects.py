@@ -12,10 +12,8 @@ class Project:
 
     def project_is_completed(self):
         """checks if the project has been completed and returns a boolean accordingly"""
-        if self.percentage == 100:
-            return True
-        else:
-            return False
+
+        return self.percentage if self.percentage == 100 else False
 
     def updated_percentage(self, updated_percentage):
         """updates the percentage completion of the project"""
