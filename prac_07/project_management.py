@@ -9,7 +9,7 @@ from datetime import *
 
 FILENAME = "projects.txt"
 
-menu = """Menu:
+MENU = """Menu:
 - (L)oad projects  
 - (S)ave projects  
 - (D)isplay projects  
@@ -27,7 +27,7 @@ def main():
     projects.sort()
     print(f"Loaded {len(projects)} projects from projects.txt")
 
-    print(menu)
+    print(MENU)
     user_choice = input(">>> ").upper()
 
     # start of menu inputs
@@ -108,7 +108,7 @@ def main():
         # end of user menu
         else:
             print(f"{user_choice} is not a valid option")
-        print(menu)
+        print(MENU)
         user_choice = input(">>> ").upper()
 
     # asks user is they would want to save the file before quitting
@@ -218,7 +218,7 @@ def filter_project_by_date(projects, user_filter_date):
 
 
 def saves_file(projects):
-    """opens and saves the projects list into the file of the users choice depending on the file they opened"""
+    """opens and saves the projects list into the file of the users choice depending on the file they opened    """
     with open(FILENAME, "w") as out_file:
         out_file.write("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
         for project in projects:

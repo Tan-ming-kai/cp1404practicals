@@ -1,0 +1,29 @@
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        TextInput:
+            id: miles_input
+            # if no input is entered, assumes input is 0
+            text: '0'
+            size_hint_x: .80
+            on_text_validate:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: .20
+            Button:
+                text: 'up'
+                on_press: app.handle_increment(1)
+            Button:
+                text: 'down'
+                on_press: app.handle_increment(-1)
+
+    Button:
+        on_press: app.converts_distance(miles_input.text)
+
+        text: 'Convert miles to km'
+    Label:
+        id: output_label
+        text: ''
+        color: (1, 1, 0, 1)
+
